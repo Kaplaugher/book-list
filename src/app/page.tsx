@@ -1,6 +1,6 @@
 "use client";
 import BookList from "@/components/BookList";
-import BookSearch, { Book } from "@/components/BookSearch";
+import BookSearch from "@/components/BookSearch";
 import { useStore } from "@/store";
 import { useEffect, useState } from "react";
 
@@ -12,7 +12,7 @@ export default function Home() {
   }, [loadBooksFromLocalStorage]);
 
   return (
-    <div className="contianer mx-auto">
+    <div className="contianer mx-auto ">
       <BookSearch />
       <BookList />
     </div>
