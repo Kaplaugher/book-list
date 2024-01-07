@@ -11,17 +11,10 @@ import {
   TableHeader,
   TableRow,
 } from "./ui/table";
+import { Book, useStore } from "@/store";
 
-export type Book = {
-  key: string;
-  title: string;
-  author_name: string[];
-  first_publish_year: number;
-  number_of_pages_median: number;
-  status: "done" | "inProgress" | "backlog";
-};
-
-function BookSearch({ onAddBook }: { onAddBook: (book: Book) => void }) {
+function BookSearch() {
+  const { books, addBook } = useStore((state) => state);
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
@@ -95,7 +88,7 @@ function BookSearch({ onAddBook }: { onAddBook: (book: Book) => void }) {
                   <Button
                     variant="link"
                     onClick={() =>
-                      onAddBook({
+                      addBook({
                         key: book.key,
                         title: book.title,
                         author_name: book.author_name,
@@ -105,7 +98,7 @@ function BookSearch({ onAddBook }: { onAddBook: (book: Book) => void }) {
                         status: "backlog",
                       })
                     }
-                    disabled={loading}
+                    disabled={books.some((b) => b.key === book.key)}
                   >
                     Add
                   </Button>
