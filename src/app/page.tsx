@@ -30,10 +30,18 @@ export default function Home() {
     localStorage.setItem("readingList", JSON.stringify(newBooks));
   };
 
+  const removeBook = (bookToRemove: Book) => {
+    if (window.confirm("Are you sure you want to remove this book?")) {
+      const newBooks = books.filter((b) => b.key !== bookToRemove.key);
+      setBooks(newBooks);
+      localStorage.setItem("readingList", JSON.stringify(newBooks));
+    }
+  };
+
   return (
     <div className="contianer mx-auto">
       <BookSearch onAddBook={addBook} />
-      <BookList books={books} onMoveBook={moveBook} />
+      <BookList books={books} onMoveBook={moveBook} onRemoveBook={removeBook} />
     </div>
   );
 }

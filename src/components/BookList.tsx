@@ -14,9 +14,11 @@ import { Button } from "./ui/button";
 function BookList({
   books,
   onMoveBook,
+  onRemoveBook,
 }: {
   books: Book[];
   onMoveBook: (book: Book, targetList: Book["status"]) => void;
+  onRemoveBook: (book: Book) => void;
 }) {
   const moveToList = (book: Book, targetList: Book["status"]) => {
     onMoveBook(book, targetList);
@@ -29,7 +31,10 @@ function BookList({
           <CardTitle>{book.title}</CardTitle>
           <CardDescription>{book.author_name}</CardDescription>
         </CardHeader>
-        <CardFooter>
+        <CardFooter className="flex justify-between">
+          <Button variant="destructive" onClick={() => onRemoveBook(book)}>
+            Remove
+          </Button>
           <div className="inline-flex gap-2">
             <Button
               className="btn btn-sm btn-outline"
