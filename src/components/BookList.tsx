@@ -61,13 +61,13 @@ function BookList() {
     );
   };
 
-  const onDragEnd = (result: any) => {
-    if (!result.destination) return;
-    const sourceIndex = result.source.index;
-    const destinationIndex = result.destination.index;
-    const listType = result.destination.droppableId as Book["status"];
-    reorderBooks(listType, sourceIndex, destinationIndex);
-  };
+  // const onDragEnd = (result: any) => {
+  //   if (!result.destination) return;
+  //   const sourceIndex = result.source.index;
+  //   const destinationIndex = result.destination.index;
+  //   const listType = result.destination.droppableId as Book["status"];
+  //   reorderBooks(listType, sourceIndex, destinationIndex);
+  // };
 
   //   const renderDraggableBookList = (listType: Book["status"]) => {
   //     const filteredBooks = books.filter((b) => b.status === listType);
@@ -84,33 +84,28 @@ function BookList() {
   return (
     <div className="space-y-8 p-4">
       <h2 className="mb-4 text-2xl font-bold">My Reading List</h2>
-      <DragDropContext onDragEnd={onDragEnd}>
-        {books.filter((b) => b.status === "backlog").length > 0 && (
-          <div>
-            <h2 className="mb-4 text-2xl font-bold">Backlog</h2>
-            <div>
-              {books
-                .filter((b) => b.status === "backlog")
-                .map((book, index) => renderBookItem(book, index, "backlog"))}
-            </div>
-          </div>
-        )}
-      </DragDropContext>
 
-      <DragDropContext onDragEnd={onDragEnd}>
-        {books.filter((b) => b.status === "inProgress").length > 0 && (
+      {books.filter((b) => b.status === "inProgress").length > 0 && (
+        <div>
+          <h2 className="mb-4 text-2xl font-bold">In Progress</h2>
           <div>
-            <h2 className="mb-4 text-2xl font-bold">In Progress</h2>
-            <div>
-              {books
-                .filter((b) => b.status === "inProgress")
-                .map((book, index) =>
-                  renderBookItem(book, index, "inProgress")
-                )}
-            </div>
+            {books
+              .filter((b) => b.status === "inProgress")
+              .map((book, index) => renderBookItem(book, index, "inProgress"))}
           </div>
-        )}
-      </DragDropContext>
+        </div>
+      )}
+
+      {books.filter((b) => b.status === "backlog").length > 0 && (
+        <div>
+          <h2 className="mb-4 text-2xl font-bold">Backlog</h2>
+          <div>
+            {books
+              .filter((b) => b.status === "backlog")
+              .map((book, index) => renderBookItem(book, index, "backlog"))}
+          </div>
+        </div>
+      )}
 
       {books.filter((b) => b.status === "done").length > 0 && (
         <div>

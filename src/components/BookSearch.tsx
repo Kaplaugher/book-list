@@ -115,7 +115,8 @@ function BookSearch() {
       </div>
       <div className="mt-4 flex items-center justify-between">
         <div>
-          Page {currentPage} - {currentPage * resultsPerPage} of {totalResults}
+          Page {currentPage} - Showing {currentPage * resultsPerPage} of{" "}
+          {totalResults} results
         </div>
         <div>
           <Button
